@@ -35,6 +35,13 @@ $ docker pull filiperfernandes/ai-domotics:v1
 - Run it:
 
 ```
-$ docker run -ti --privileged -p 5000:5000 ai_domotics
+$ docker run -ti --privileged -p 5000:5000 filiperfernandes/ai-domotics:v1
 ```
+
+### Music Streaming
+
+```
+docker pull aaaler/vlc-nox-pi
+docker run -ti  --privileged -d aaaler/vlc-nox-pi
+``
 
