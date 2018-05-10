@@ -125,11 +125,23 @@ def streamyt():
 
 @app.route('/play', methods=['GET', 'POST'])
 def play():
-        content = request.get_json(silent=True)
-        print (content)
-        music=content['music']
-        os.system('docker exec -it a4d94942d799 vlc --no-video music/m1.mp3')
-        return ("Playing...")
+# content = request.get_json(silent=True)
+# print (content)
+# music=content['music']
+# os.system("runuser -l  vlc -c 'vlc --no-video /root/music/m1.mp3'")
+	cmd=['mpc', 'play']
+	p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE) 
+	return ("Playing...")
+
+
+@app.route('/stop', methods=['GET', 'POST'])
+def stop():
+	cmd=['mpc', 'stop']
+	p  = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+	return ("Stopped")
+
+
+
 
 #mpv --no-video "$(yturl https://www.youtube.com/watch?v=N73sDPuxKQI&list=RDN73sDPuxKQI)"    
 if __name__ == '__main__':
