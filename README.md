@@ -21,7 +21,7 @@ $ sudo usermod -aG docker pi
 ```
 
 
-## Usage
+## Get it up and running
 
 - Clone this repo
 - Build Dockerfile ou pull it from remote docker repo:
@@ -29,19 +29,38 @@ $ sudo usermod -aG docker pi
 ```
 $ docker build -t ai-domotics .
 or
-$ docker pull filiperfernandes/ai-domotics:v1
+$ docker pull filiperfernandes/ai-domotics:v2
 ```
 
 - Run it:
 
 ```
-$ docker run -ti --privileged -p 5000:5000 filiperfernandes/ai-domotics:v1
+$ docker run -ti --privileged -p 5000:5000 --rm -v /dev/snd:/dev/snd filiperfernandes/ai-domotics:v2
 ```
 
-### Music Streaming
+## Usage
+
+- LED: ON/OFF/STATE (GET)
+```
+http://192.168.1.2:5000/on
+```
+
+- Radio: Play/Stop
+```
+http://192.168.1.2:5000/play_or_stop
+```
+
+- Radio add stream
+```
+URL:
+
+http://192.168.1.2:5000/radio
+
+Body:
+
+{
+    "url": "http://centova.radios.pt:8401/stream.mp3/1"
+}
 
 ```
-docker pull aaaler/vlc-nox-pi
-docker run -ti  --privileged -d aaaler/vlc-nox-pi
-``
 

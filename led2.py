@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-import time
+import time, subprocess
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(18,GPIO.OUT)
@@ -99,3 +99,8 @@ def state(pin):
 		return ("Ligado")
 	else:
 		return ("Desligado")
+
+def mpcCommand(cmd):
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        return  p.stdout.read()
+

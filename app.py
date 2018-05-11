@@ -2,7 +2,7 @@
 from flask import Flask, jsonify, abort, request, make_response, url_for
 #from flask_httpauth import HTTPBasicAuth
 from led2 import *
-import os
+import os, subprocess
 
 app = Flask(__name__, static_url_path = "")
     
@@ -125,11 +125,41 @@ def streamyt():
 
 @app.route('/play', methods=['GET', 'POST'])
 def play():
-        content = request.get_json(silent=True)
-        print (content)
-        music=content['music']
-        os.system('docker exec -it a4d94942d799 vlc --no-video music/m1.mp3')
-        return ("Playing...")
+# content = request.get_json(silent=True)
+# print (content)
+# music=content['music']
+# os.system("runuser -l  vlc -c 'vlc --no-video /root/music/m1.mp3'")
+#	cmd=['mpc', 'play']
+#	p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE) 
+	mpcCommand(['mpc', 'play'])
+	return ("Playing...")
+
+
+@app.route('/stop', methods=['GET', 'POST'])
+def stop():
+#	cmd=['mpc', 'stop']
+#	p  = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+#	return ("Stopped")
+	mpcCommand(['mpc', 'stop'])
+	return ("Stopped")
+
+@app.route('/volup', methods=['GET', 'POST'])
+def volup():
+        mpcCommand(['mpc', 'volume', '+10'])
+        return ("Volume +10")
+
+@app.route('/voldown', methods=['GET', 'POST'])
+def voldown():
+        mpcCommand(['mpc', 'volume', '-10'])
+        return ("Volume -10")
+
+@app.route('/radio', methods=['GET', 'POST'])
+def chRadio():
+	content = request.get_json(silent=True)
+	url=content['url']
+	mpcCommand(['mpc', 'clear'])
+        mpcCommand(['mpc', 'add', url])
+        return ("Volume -10")
 
 #mpv --no-video "$(yturl https://www.youtube.com/watch?v=N73sDPuxKQI&list=RDN73sDPuxKQI)"    
 if __name__ == '__main__':
