@@ -1,12 +1,10 @@
-FROM arm32v5/debian
+FROM resin/rpi-raspbian
 
-RUN apt-get -yq update
-RUN apt-get -yq install python2.7-dev
-#RUN apt-get -yq install vlc-nox
-RUN apt-get -yq install python-pip
-RUN apt-get -yq install python-dev
-RUN apt-get -yq install python-pip
-RUN apt-get -yq install mpd mpc
+RUN apt-get update && apt-get install -y \
+    python2.7-dev \
+    python-pip \
+    python-dev \
+    mpd mpc
 
 RUN /bin/bash -c "mpc add http://radio.nolife-radio.com:9000/stream"
 
