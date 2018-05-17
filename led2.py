@@ -3,20 +3,22 @@ import time, subprocess
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(18,GPIO.OUT)
+GPIO.setup(17,GPIO.OUT)
+GPIO.setup(27,GPIO.OUT)
 
-def led_on():
+def led_on(pin):
 
 	print ("LED on")
-	GPIO.output(18,GPIO.HIGH)
+	GPIO.output(pin,GPIO.HIGH)
 
-def led_off():
+def led_off(pin):
 
 	print ("LED off")
-	GPIO.output(18,GPIO.LOW)
+	GPIO.output(pin,GPIO.LOW)
 
-led_on()
+led_on(18)
 time.sleep(1)
-led_off()
+led_off(18)
 
 CODE = {' ': ' ',
         "'": '.----.',
@@ -96,9 +98,9 @@ def state(pin):
 	st = GPIO.input(int(pin))
 	
 	if (st == True):
-		return ("Ligado")
+		return ("1")
 	else:
-		return ("Desligado")
+		return ("0")
 
 def mpcCommand(cmd):
         p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)

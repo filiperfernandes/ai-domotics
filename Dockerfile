@@ -15,8 +15,11 @@ RUN pip install -r requirements.txt
 
 ADD ./app.py ./app.py
 ADD ./led2.py ./led2.py
+ADD ./temp2.py ./temp2.py
+ADD ./music/m1.mp3 /var/lib/mpd/music/m1.mp3
+#ADD ./lib/4.14.34+/* /lib/modules/4.14.34+/
 
-ENTRYPOINT service mpd restart && mpc add http://radio.nolife-radio.com:9000/stream && python app.py
+ENTRYPOINT service mpd restart && mpc add http://centova.radios.pt:8401/stream.mp3/1 && /bin/bash
 
 EXPOSE 5000
 
