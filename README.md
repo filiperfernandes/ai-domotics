@@ -82,4 +82,20 @@ http://192.168.1.2:5000/intensity?val=0 (0=off/1=one_led/2=2_leds/3=3_leds)
 http://192.168.1.2:5000/temp (return string with temp in ºC)
 ```
 
+Due to some incompatibilities between libraries, for the temperature module use this docker container:
+```
+filiperfernandes/ai-domotics:temp
+```
 
+## Authors
+
+* **Filipe Fernandes** - *Low Level Module (this)* - [filiperfernandes](https://github.com/filiperfernandes)
+* **Tomás Jacob** - *High Level Module* - [TJacoob](https://github.com/TJacoob/AI)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Acknowledgments
+
+* A special thanks to [NEETIIST](https://github.com/NEETIIST) for the equipment.
