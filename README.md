@@ -29,13 +29,13 @@ $ sudo usermod -aG docker pi
 ```
 $ docker build -t ai-domotics .
 or
-$ docker pull filiperfernandes/ai-domotics:v2
+$ docker pull filiperfernandes/ai-domotics:v4
 ```
 
 - Run it:
 
 ```
-$ docker run -ti --privileged -p 5000:5000 --rm -v /dev/snd:/dev/snd filiperfernandes/ai-domotics:v2
+$ docker run -ti --privileged -p 5000:5000 --rm -v /dev/snd:/dev/snd filiperfernandes/ai-domotics:v4
 ```
 
 ## Usage
@@ -43,11 +43,19 @@ $ docker run -ti --privileged -p 5000:5000 --rm -v /dev/snd:/dev/snd filiperfern
 - LED: ON/OFF/STATE (GET)
 ```
 http://192.168.1.2:5000/on
+
+or
+
+http://192.168.1.2:5000/led?val=0 (0=off/1=on)
 ```
 
 - Radio: Play/Stop
 ```
 http://192.168.1.2:5000/play_or_stop
+
+or
+
+http://192.168.1.2:5000/toggle?val=0 (0=stop/1=play)
 ```
 
 - Radio add stream
@@ -63,4 +71,15 @@ Body:
 }
 
 ```
+
+- LED: Itensity (GET)
+```
+http://192.168.1.2:5000/intensity?val=0 (0=off/1=one_led/2=2_leds/3=3_leds)
+```
+
+- Temperature Sensor (GET)
+```
+http://192.168.1.2:5000/temp (return string with temp in ºC)
+```
+
 
